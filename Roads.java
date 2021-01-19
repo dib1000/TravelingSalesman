@@ -30,20 +30,33 @@ public class Roads{
       }
     }
   }
+  public static boolean check(List<Integer> input, ArrayList<String> output) {
+    String tmp = input.toString();
+    if (output.contains(tmp)){
+      return true;
+    }
+    else {
+      output.add(tmp);
+      return false;
+    }
+  }
   public static int findSmallestDistance(ArrayList<String> cities, int[][] distances){
     ArrayList<Integer> indeces=new ArrayList<Integer>();
+    ArrayList<String> usedCombos = new ArrayList<>();
     for (int i=0; i<cities.size(); i++){
       indeces.add(i);
     }
-    int mindistance=(int)POSITIVE_INFINITY;
-    for (int a=0; a<cities.size(); a++){
+    int mindistance=Integer.MAX_VALUE;
+    while (check(indeces, usedCombos)){
       Collections.shuffle(indeces);
-      int totaldistance=0;
-      for (int i=0; i<cities.size()-1; i++){
-        totaldistance+=distances[i][i+1];
-      }
-      if (totaldistance<mindistance) mindistance=totaldistance;
     }
+    usedCombos.add(indeces.toString());
+    int totaldistance=0;
+    for (int i=0; i<indeces.size()-1; i++){
+      totaldistance+=distances[i][i+1];
+    }
+    if (totaldistance<mindistance) mindistance=totaldistance;
+    return mindistance;
   }
 
 }
