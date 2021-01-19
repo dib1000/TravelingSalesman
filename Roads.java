@@ -43,7 +43,7 @@ public class Roads{
     }
     int[] totalDists = addTotalDists(numCities, distances);
     int answer =  findSmallestDistance(totalDists);
-    System.out.println(answer);
+    System.out.println("SHORTEST DISTANCE: " + answer);
   }
 
   public static int[] addTotalDists(int numCities, int[][] distances){
@@ -64,9 +64,7 @@ public class Roads{
         while (check(indeces, usedCombos)){
           Collections.shuffle(indeces);
         }
-        System.out.println(indeces);
         i++;
-        System.out.println(i);
       }
       return totalDists;
   }
