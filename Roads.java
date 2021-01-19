@@ -41,7 +41,6 @@ public class Roads{
         distances[cities.indexOf(city2)][cities.indexOf(city1)] = distance;
       }
     }
-    int[] totalDists = addTotalDists(numCities, distances);
     int answer =  findSmallestDistance(totalDists);
     System.out.println(answer);
   }
