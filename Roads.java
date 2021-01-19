@@ -29,15 +29,21 @@ public class Roads{
         distances[cities.indexOf(city2)][cities.indexOf(city1)] = distance;
       }
     }
-  int mindistance=POSITIVE_INFINITY;
-  for (int a=0; a<cities.size()!*cities.size(); a++){
-    Collections.shuffle(cities);
-    int totaldistance=0;
-    for (int i=0; i<cities.size()-1; i++){
-      totaldistance+=distances[i][i+1];
-    }
-    if (totaldistance<mindistance) mindistance=totaldistance;
   }
+  public static int findSmallestDistance(ArrayList<String> cities, int[][] distances){
+    ArrayList<Integer> indeces=new ArrayList<Integer>();
+    for (int i=0; i<cities.size(); i++){
+      indeces.add(i);
+    }
+    int mindistance=(int)POSITIVE_INFINITY;
+    for (int a=0; a<cities.size(); a++){
+      Collections.shuffle(indeces);
+      int totaldistance=0;
+      for (int i=0; i<cities.size()-1; i++){
+        totaldistance+=distances[i][i+1];
+      }
+      if (totaldistance<mindistance) mindistance=totaldistance;
+    }
   }
 
 }
