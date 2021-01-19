@@ -41,32 +41,36 @@ public class Roads{
         distances[cities.indexOf(city2)][cities.indexOf(city1)] = distance;
       }
     }
-
-  ArrayList<String> usedCombos = new ArrayList<>();
-  ArrayList<Integer> indeces=new ArrayList<Integer>();
-  for (int i=0; i<cities.size(); i++){
-    indeces.add(i);
-  }
-  int[] totalDists = new int[permute(numCities)];
-
-    for(int i = 0; i < permute(numCities);){
-      int in = 0;
-      totalDists[i] =0;
-      for(int j = 0; j < numCities-1;j++){
-        totalDists[i] = totalDists[i]+ distances[indeces.get(in)][indeces.get(in+1)];
-        in++;
-      }
-      Collections.shuffle(indeces);
-      while (check(indeces, usedCombos)){
-        Collections.shuffle(indeces);
-      }
-      System.out.println(indeces);
-      i++;
-      System.out.println(i);
-    }
+    int[] totalDists = addTotalDists(numCities, distances);
     int answer =  findSmallestDistance(totalDists);
     System.out.println(answer);
   }
+
+  public static int[] addTotalDists(int numCities, int[][] distances){
+    ArrayList<String> usedCombos = new ArrayList<>();
+    ArrayList<Integer> indeces=new ArrayList<Integer>();
+    for (int i=0; i<numCities; i++){
+      indeces.add(i);
+    }
+    int[] totalDists = new int[permute(numCities)];
+      for(int i = 0; i < permute(numCities);){
+        int in = 0;
+        totalDists[i] =0;
+        for(int j = 0; j < numCities-1;j++){
+          totalDists[i] = totalDists[i]+ distances[indeces.get(in)][indeces.get(in+1)];
+          in++;
+        }
+        Collections.shuffle(indeces);
+        while (check(indeces, usedCombos)){
+          Collections.shuffle(indeces);
+        }
+        System.out.println(indeces);
+        i++;
+        System.out.println(i);
+      }
+      return totalDists;
+  }
+
   public static int findSmallestDistance(int[] distances){
     int mindistance=Integer.MAX_VALUE;
     for (int i =0;i<distances.length;i++ ) {
