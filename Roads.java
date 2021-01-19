@@ -1,5 +1,16 @@
 import java.util.*;
 public class Roads{
+  public static boolean check(List<Integer> input, ArrayList<String> output) {
+    String tmp = input.toString();
+    if (output.contains(tmp)){
+    return true;
+  }
+  else {
+    output.add(tmp);
+    return false;
+  }
+}
+
   public static void main(String[] args) {
     ArrayList<String> cities = new ArrayList<String>();
     Scanner file = new Scanner(System.in);
@@ -15,6 +26,7 @@ public class Roads{
         }
       }
     }
+    int numCities = cities.size();
     int[][] distances = new int[cities.size()][cities.size()];
     Scanner c = new Scanner(copy);
     while (c.hasNextLine()){
@@ -29,21 +41,47 @@ public class Roads{
         distances[cities.indexOf(city2)][cities.indexOf(city1)] = distance;
       }
     }
+
+  ArrayList<String> usedCombos = new ArrayList<>();
+  ArrayList<Integer> indeces=new ArrayList<Integer>();
+  for (int i=0; i<cities.size(); i++){
+    indeces.add(i);
   }
-  public static int findSmallestDistance(ArrayList<String> cities, int[][] distances){
-    ArrayList<Integer> indeces=new ArrayList<Integer>();
-    for (int i=0; i<cities.size(); i++){
-      indeces.add(i);
-    }
-    int mindistance=(int)POSITIVE_INFINITY;
-    for (int a=0; a<cities.size(); a++){
-      Collections.shuffle(indeces);
-      int totaldistance=0;
-      for (int i=0; i<cities.size()-1; i++){
-        totaldistance+=distances[i][i+1];
+  int[] totalDists = new int[permute(numCities)];
+
+    for(int i = 0; i < permute(numCities);){
+      int in = 0;
+      totalDists[i] =0;
+      for(int j = 0; j < numCities-1;j++){
+        totalDists[i] = totalDists[i]+ distances[indeces.get(in)][indeces.get(in+1)];
+        in++;
       }
-      if (totaldistance<mindistance) mindistance=totaldistance;
+      Collections.shuffle(indeces);
+      while (check(indeces, usedCombos)){
+        Collections.shuffle(indeces);
+      }
+      System.out.println(indeces);
+      i++;
+      System.out.println(i);
     }
+    int answer =  findSmallestDistance(totalDists);
+    System.out.println(answer);
+  }
+  public static int findSmallestDistance(int[] distances){
+    int mindistance=Integer.MAX_VALUE;
+    for (int i =0;i<distances.length;i++ ) {
+      if(distances[i] < mindistance){
+        mindistance = distances[i];
+      }
+    }
+    return mindistance;
   }
 
+  public static int permute(int a){
+    int permutations = 1;
+    for (int i =a; a>0; a--){
+      permutations = permutations * a;
+    }
+    return permutations;
+  }
 }
