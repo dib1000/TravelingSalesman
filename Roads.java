@@ -41,7 +41,10 @@ public class Roads{
         distances[cities.indexOf(city2)][cities.indexOf(city1)] = distance;
       }
     }
+    int answer =  findSmallestDistance(cities, distances);
+    System.out.println(answer);
   }
+
   public static int findSmallestDistance(ArrayList<String> cities, int[][] distances){
     ArrayList<Integer> indeces=new ArrayList<Integer>();
     ArrayList<String> usedCombos = new ArrayList<>();
