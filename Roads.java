@@ -1,17 +1,5 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 public class Roads{
-
-  // public static void print2D(int mat[][]){
-  //   for (int i = 0; i < mat.length; i++){
-  //     for (int j = 0; j < mat[i].length; j++){
-  //       System.out.print(mat[i][j] + " ");
-  //     }
-  //     System.out.println("");
-  //   }
-  // }
-
   public static void main(String[] args) {
     ArrayList<String> cities = new ArrayList<String>();
     Scanner file = new Scanner(System.in);
@@ -41,7 +29,15 @@ public class Roads{
         distances[cities.indexOf(city2)][cities.indexOf(city1)] = distance;
       }
     }
-    System.out.println(cities);
+  int mindistance=POSITIVE_INFINITY;
+  for (int a=0; a<cities.size()!*cities.size(); a++){
+    Collections.shuffle(cities);
+    int totaldistance=0;
+    for (int i=0; i<cities.size()-1; i++){
+      totaldistance+=distances[i][i+1];
+    }
+    if (totaldistance<mindistance) mindistance=totaldistance;
+  }
   }
 
 }
