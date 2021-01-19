@@ -12,20 +12,6 @@ public class Roads{
     }
   }
 
-  public static void findDistances(ArrayList<String> cities, int[][] distances, Scanner s){
-    while (s.hasNextLine()){
-      Scanner line = new Scanner(s.nextLine());
-      while (line.hasNext()){
-        String city1 = line.next();
-        line.next();
-        String city2 = line.next();
-        line.next();
-        int distance = line.nextInt();
-        distances[cities.indexOf(city1)][cities.indexOf(city2)] = distance;
-      }
-    }
-  }
-
   public static void main(String[] args) {
     ArrayList<String> cities = new ArrayList<String>();
     Scanner file = new Scanner(System.in);
@@ -36,7 +22,6 @@ public class Roads{
       Scanner line = new Scanner(s);
       for (int i = 0; i < 3 && line.hasNext(); i++){
         String city = line.next();
-        System.out.println(city);
         if (!(cities.contains(city) || city.equals("to"))){
           cities.add(city);
         }
@@ -48,13 +33,10 @@ public class Roads{
       Scanner line = new Scanner(c.nextLine());
       while (line.hasNext()){
         String city1 = line.next();
-        System.out.print(city1);
         line.next();
         String city2 = line.next();
-        System.out.print(" " + city2);
         line.next();
         int distance = line.nextInt();
-        System.out.println(" =" + distance);
         distances[cities.indexOf(city1)][cities.indexOf(city2)] = distance;
       }
     }
