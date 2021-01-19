@@ -1,5 +1,16 @@
 import java.util.*;
 public class Roads{
+  public static boolean check(List<Integer> input, ArrayList<String> output) {
+    String tmp = input.toString();
+    if (output.contains(tmp)){
+    return true;
+  }
+  else {
+    output.add(tmp);
+    return false;
+  }
+}
+
   public static void main(String[] args) {
     ArrayList<String> cities = new ArrayList<String>();
     Scanner file = new Scanner(System.in);
@@ -15,6 +26,7 @@ public class Roads{
         }
       }
     }
+    int numCities = cities.size();
     int[][] distances = new int[cities.size()][cities.size()];
     Scanner c = new Scanner(copy);
     while (c.hasNextLine()){
@@ -28,16 +40,6 @@ public class Roads{
         distances[cities.indexOf(city1)][cities.indexOf(city2)] = distance;
         distances[cities.indexOf(city2)][cities.indexOf(city1)] = distance;
       }
-    }
-  }
-  public static boolean check(List<Integer> input, ArrayList<String> output) {
-    String tmp = input.toString();
-    if (output.contains(tmp)){
-      return true;
-    }
-    else {
-      output.add(tmp);
-      return false;
     }
   }
   public static int findSmallestDistance(ArrayList<String> cities, int[][] distances){
@@ -59,4 +61,11 @@ public class Roads{
     return mindistance;
   }
 
+  public static int permute(int a){
+    int permutations = 1;
+    for (int i =a; a>0; a--){
+      permutations = permutations * a;
+    }
+    return permutations;
+  }
 }
