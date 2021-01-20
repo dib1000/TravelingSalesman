@@ -43,7 +43,7 @@ public class Roads{
     }
     int[] totalDists = addTotalDists(numCities, distances);
     int answer =  findSmallestDistance(totalDists);
-    System.out.println("SHORTEST DISTANCE: " + answer);
+    System.out.println(answer);//prints shortest distance
   }
 
   public static int[] addTotalDists(int numCities, int[][] distances){
